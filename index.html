@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#123821">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="پک‌ساز">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="app.css">
+<title>پک‌ساز | پکینگ لیست تخته و چوب</title>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+<symbol id="logo" viewBox="0 0 64 64"><rect x="9" y="13" width="42" height="11" rx="3.5" fill="#e9c992"/><rect x="15" y="26.5" width="42" height="11" rx="3.5" fill="#d6a868"/><rect x="11" y="40" width="42" height="11" rx="3.5" fill="#c08d4e"/></symbol>
+<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+<symbol id="i-out" viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+</g>
+</svg>
+
+<div id="splash"><svg class="lg"><use href="#logo"/></svg><h1>پک‌ساز</h1><p>پکینگ لیست تخته و چوب</p></div>
+
+<header class="top">
+  <div class="brand"><span class="mark"><svg><use href="#logo"/></svg></span><div><h1>پک‌ساز</h1><p>پکینگ لیست تخته و چوب</p></div></div>
+  <button id="btnInstall" class="chip" hidden>نصب اپ</button>
+</header>
+
+<main>
+  <section class="card">
+    <label class="lbl" for="title">عنوان لیست</label>
+    <input id="title" class="ttl" placeholder="مثلاً: بار شماره ۱۲ – راش" autocomplete="off" enterkeyhint="done">
+  </section>
+
+  <section class="stats">
+    <div class="stat main"><span>جمع متراژ</span><b id="sVol">0.000</b></div>
+    <div class="stat"><span>تعداد شاخه</span><b id="sCnt">0</b></div>
+    <div class="stat"><span>ردیف</span><b id="sRows">0</b></div>
+  </section>
+
+  <form id="form" class="card" autocomplete="off" novalidate>
+    <div class="fh"><h2 id="fTitle">ردیف جدید</h2>
+      <label class="sw"><input type="checkbox" id="bundle"><i></i><span>بندل ترکیبی (")</span></label></div>
+    <div class="grid">
+      <label>ارتفاع <small>سانتی‌متر</small><input id="h" inputmode="decimal" placeholder="0" enterkeyhint="next"></label>
+      <label>عرض <small>سانتی‌متر</small><input id="w" inputmode="decimal" placeholder="0" enterkeyhint="next"></label>
+      <label>طول <small>متر</small><input id="l" inputmode="decimal" placeholder="0" enterkeyhint="next"></label>
+      <label>تعداد <small>عدد</small><input id="c" inputmode="numeric" placeholder="0" enterkeyhint="done"></label>
+    </div>
+    <div class="pv">متراژ این ردیف <b id="pv">0.000</b></div>
+    <button class="btn pri" id="btnSubmit" type="submit"><svg class="i"><use href="#i-plus"/></svg><span id="sTxt">افزودن ردیف</span></button>
+    <div class="eb" id="editBar" hidden>
+      <button type="button" class="btn sec" id="bUp"><svg class="i"><use href="#i-up"/></svg>بالا</button>
+      <button type="button" class="btn sec" id="bDn"><svg class="i"><use href="#i-down"/></svg>پایین</button>
+      <button type="button" class="btn dng" id="bDel"><svg class="i"><use href="#i-trash"/></svg>حذف</button>
+      <button type="button" class="btn sec" id="bCancel"><svg class="i"><use href="#i-x"/></svg>انصراف</button>
+    </div>
+  </form>
+
+  <section class="card tc">
+    <div class="ts"><table>
+      <thead><tr><th>متراژ</th><th>تعداد</th><th>طول</th><th>عرض</th><th>ارتفاع</th><th>ردیف</th></tr></thead>
+      <tbody id="tb"></tbody></table></div>
+    <p class="empty" id="empty">هنوز ردیفی ثبت نشده است.</p>
+    <p class="hint">برای ویرایش، حذف یا جابه‌جایی هر ردیف روی آن بزنید.</p>
+  </section>
+</main>
+
+<nav class="dock">
+  <button id="bNew"><svg class="i"><use href="#i-plus"/></svg>جدید</button>
+  <button id="bLib"><svg class="i"><use href="#i-folder"/></svg>لیست‌ها</button>
+  <button id="bOut" class="go"><svg class="i"><use href="#i-out"/></svg>خروجی</button>
+</nav>
+
+<div id="bd"></div>
+<div class="sheet" id="shLib"><div class="grab"></div><h3>پکینگ‌های ذخیره‌شده</h3><div id="libList"></div></div>
+<div class="sheet" id="shOut"><div class="grab"></div><h3>خروجی گرفتن</h3>
+  <p class="sub">جدول با عنوان، تاریخ و جمع‌ها در قالب A4 ساخته می‌شود.</p>
+  <button class="btn pri" data-out="pdf">ذخیره PDF</button>
+  <button class="btn sec" data-out="jpg">ذخیره عکس (JPEG)</button>
+  <button class="btn sec" data-out="share" id="bShare" hidden>اشتراک‌گذاری PDF</button>
+</div>
+<div id="busy">در حال ساخت خروجی…</div>
+<div id="toast"></div>
+<div id="print"></div>
+
+<script src="libs/html2canvas.min.js"></script>
+<script src="libs/jspdf.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
